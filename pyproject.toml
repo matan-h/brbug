@@ -1,9 +1,21 @@
 [tool.poetry]
 name = "brbug"
 version = "0.1.0"
-description = ""
+description = "a tool/library to debug android BeeWare apps on Android with ease."
 authors = ["matan-h <matan.honig2@gmail.com>"]
 readme = "README.md"
+license = "MIT"
+
+homepage = "https://github.com/matan-h/brbug"
+keywords = [
+    "beeware",
+    "android",
+    "debug",
+    "debuging",
+    "simple",
+    "easy",
+    "briefcase"
+]
 
 [tool.poetry.dependencies]
 python = "^3.11"
@@ -23,3 +35,6 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry.scripts]
 brbug = 'brbug.__main__:main'
+
+[tool.poetry.urls]
+issues = "https://github.com/matan-h/brbug/issues"
