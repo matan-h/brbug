@@ -3,9 +3,11 @@
 `brBug` is a tool/library to debug android BeeWare apps on Android with ease.
 
 ## Installation
-
 Install using pip: `pip install brbug`
-if you want the `rich` version of the `brbug` CLI, you can also install it using: `pip install brbug[full]`
+```bash
+pip install brbug
+```
+if you want the `rich` version of the `brbug` CLI, you can also install it using: `pip install brbug[rich]`
 
 ## Usage
 
