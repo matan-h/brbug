@@ -3,11 +3,13 @@
 `brBug` is a tool/library to debug android BeeWare apps on Android with ease.
 
 ## Installation
-Install using pip: `pip install brbug`
+Install using pip: `pip install brbug`.
 ```bash
 pip install brbug
 ```
-if you want the `rich` version of the `brbug` CLI, you can also install it using: `pip install brbug[rich]`
+If you want the `rich` version of the `brbug` CLI, you can also install it using: `pip install brbug[rich]`
+
+If you manage your briefcase dependencies using `pyproject.toml`, add `brdebug` to the app `requires`.
 
 ## Usage
 
@@ -71,7 +73,7 @@ E/AndroidRuntime:   at <python>.toga_android.app.create(app.py:179)
 E/AndroidRuntime:   at <python>.toga_android.app.main_loop(app.py:199)
 E/AndroidRuntime:   at <python>.toga.app.main_loop(app.py:663)
 E/AndroidRuntime:   at <python>.__main__.<module>(__main__.py:3)
-E/AndroidRuntime:   at <python>.runpy._run_code(<frozen runpy>:88)#### on the build side (`brbug` cli):
+E/AndroidRuntime:   at <python>.runpy._run_code(<frozen runpy>:88)
 ```
 
 ## Supported tools
