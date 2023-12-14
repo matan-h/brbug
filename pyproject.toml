@@ -1,0 +1,25 @@
+[tool.poetry]
+name = "brbug"
+version = "0.1.0"
+description = ""
+authors = ["matan-h <matan.honig2@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+click = "^8.1.7"
+toml = "^0.10.2"
+rich-click = "^1.7.2"
+friendly-traceback = "^0.7.61"
+executing = "^2.0.1"
+
+[tool.poetry.extras]
+rich = ["rich-click"]
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.scripts]
+brbug = 'brbug.__main__:main'
