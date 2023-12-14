@@ -171,9 +171,9 @@ def catch_beeapp(cls):
     methods = inspect.getmembers(cls, predicate=inspect.isfunction)  # get all functions
     for method_name, method_func in methods:
         if (
-            inspect.isfunction(method_func)
-            and method_func.__qualname__.startswith(cls.__qualname__)
-            and not method_name.startswith("__")
+            inspect.isfunction(method_func) # ensure they are a function
+            and method_func.__qualname__.startswith(cls.__qualname__) # filter to keep only the inherited
+            and not method_name.startswith("__") # and not the magic functions (they can still be @catch ed)
         ):
             setattr(cls, method_name, catch(method_func))
 

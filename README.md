@@ -72,7 +72,7 @@ E/AndroidRuntime:   at <python>.__main__.<module>(__main__.py:3)
 E/AndroidRuntime:   at <python>.runpy._run_code(<frozen runpy>:88)#### on the build side (`brbug` cli):
 ```
 
-## supported tools
+## Supported tools
 
 brBug modifies the `executing` engine to work on android using the `tar.gz` source. 
 
@@ -83,33 +83,35 @@ That mean, by extension it supports most debugging tools:
 * friendly-traceback - this package already provide it by default.
 * [icecream](https://github.com/gruns/icecream) (although it doesn't look good in the android logcat view - somehow each word is in different line)
 
-## how its works
+## How its works
 
 Chaquopy/beeware python apps are in a `pyc` state, which mean that no line information is stored.
  That cause the normal python traceback/error to look like this:
 
 The `build` side generate `.tar.gz` file of all `.py` files in your application directory, then the `toga` side open it, find the python source and modify `executing` to use it as source. 
 
-#### why I need this `@brbug.catch_beeapp` ? It cannot just catch the errors automatically?
+#### Why I need this `@brbug.catch_beeapp` ? It cannot just catch the errors automatically?
 
-The "normal" way to catch errors is to use `sys.excepthook`. Unfortunately [chaquopy doesn't support it](https://github.com/chaquo/chaquopy/issues/1053). The other way is use `try/except`. But then `executing` came across `app.mainloop` which is heavily using java alone, and crashes (`executing.executing.NotOneValueFound`). Maybe in the future I will create a `mrbug.automatic` module which detect the toga app automatically. 
+The "normal" way to catch errors is to use `sys.excepthook`. Unfortunately [chaquopy doesn't support it](https://github.com/chaquo/chaquopy/issues/1053). The other way is use `try/except`. But then `executing` came across `app.mainloop` it crashes, as It's pretty much a java method (`executing.executing.NotOneValueFound`). Maybe in the future I will create a `mrbug.automatic` module which detect and catch the toga app automatically. 
+### what `@brbug.catch_beeapp` does?
+It wraps every method you defined (And not the ones that are inherited) with `try/ except : print traceback` to make it able to print traceback when a function fails
 
 ## FAQ
+### What not supported
 
-### what not supported
+* `rich.traceback` - it uses the traceback object instead of `executing` or `stack_data`, so I cannot support it. 
 
-* `rich.traceback` - it uses the traceback object instead of executing or stack_data, so I cannot support it. 
-
-### how to report errors/problems/suggestions
+### How to report errors/problems/suggestions
 
 please open a [GitHub issue](https://github.com/matan-h/brbug/issues)
 
-### why it's named 'brBug'
+### Why it's named 'brBug'
 
 It's like `briefcaseBug` but no one can spell it right, so `brBug`. 
 it also sounds like `mr. Bug` which is nice.
 
-### how can I donate you
+### How can I donate you
 
-If you found this library useful, it would be great if you could buy me a coffee:
+If you found this tool/library useful, it would be great if you could buy me a coffee:
+
 <a href="https://www.buymeacoffee.com/matanh" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-blue.png" alt="Buy Me A Coffee" height="47" width="200"></a>
