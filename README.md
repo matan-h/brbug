@@ -98,7 +98,7 @@ The `build` side generate `.tar.gz` file of all `.py` files in your application 
 
 The "normal" way to catch errors is to use `sys.excepthook`. Unfortunately [chaquopy doesn't support it](https://github.com/chaquo/chaquopy/issues/1053). The other way is use `try/except`. But then `executing` came across `app.mainloop` it crashes, as It's pretty much a java method (`executing.executing.NotOneValueFound`). Maybe in the future I will create a `mrbug.automatic` module which detect and catch the toga app automatically. 
 ### what `@brbug.catch_beeapp` does?
-It wraps every method you defined (And not the ones that are inherited) with `try/ except : print traceback` to make it able to print traceback when a function fails
+It wraps every method you override (And not the ones that are inherited) with `try/ except : print traceback` to make it able to print traceback when a function fails
 
 ## FAQ
 ### What not supported

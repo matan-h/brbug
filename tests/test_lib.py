@@ -46,7 +46,11 @@ def test_catch_beeapp_decorator():
     
     @catch_beeapp
     class MyClass(OneClass):
-        def anerror_with_catch(self):
+        # @override
+        def anerror_without_catch(self):
+            return 1 / 0
+        
+        def non_inherited_crash(self):
             return 1 / 0
 
     # Test method without catch
@@ -57,9 +61,12 @@ def test_catch_beeapp_decorator():
     
     # Test method with catch
     with patch('brbug.brbug.popup_error') as mock_popup_error:
-        obj_with_catch.anerror_with_catch()
+        obj_with_catch.anerror_without_catch()
         # Ensure popup_error is called when an exception is caught
         mock_popup_error.assert_called_once()
+    
+    with pytest.raises(ZeroDivisionError):
+        obj_with_catch.non_inherited_crash()
 
 @pytest.fixture
 def test_tar_file(tmp_path,monkeypatch):

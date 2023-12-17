@@ -12,8 +12,6 @@ def find_app_path():
         import toga
         return toga.App.app.paths.app
     except Exception: # no toga
-        import traceback
-        traceback.print_exc()
         try:
             return Path(sys.argv[0]).absolute().parent
         except Exception:
@@ -168,6 +166,10 @@ def catch_beeapp(cls):
     Returns:
     - class: Decorated class.
     """
+    bases_methods = []
+    for base in  cls.__bases__:
+        methods = list(map(lambda x:x[0],inspect.getmembers(base, predicate=inspect.isfunction)))
+        bases_methods.extend(methods)
     methods = inspect.getmembers(cls, predicate=inspect.isfunction)  # get all functions
     for method_name, method_func in methods:
         if (
@@ -175,6 +177,8 @@ def catch_beeapp(cls):
             and method_func.__qualname__.startswith(cls.__qualname__) # filter to keep only the inherited
             and not method_name.startswith("__") # and not the magic functions (they can still be @catch ed)
         ):
+            if bases_methods and method_name not in bases_methods:
+                continue
             setattr(cls, method_name, catch(method_func))
 
     return cls
